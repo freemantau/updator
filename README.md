@@ -3,6 +3,7 @@
 #### 介绍
 通用单文件更新程序，无依赖，通过xml配置，系统兼容windows xp至11
 
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1101/120850_c36a01e0_7976810.jpeg "QQ截图20211101120749.jpg")
 
 #### UpdateList.xml 配置说明
 
