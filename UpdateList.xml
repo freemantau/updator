@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<AutoUpdater>
+	<Description>updater</Description>
+	<Updater>
+		<Url>http://www.xxx.com/xmppath/</Url>
+		<DownloadUrl>http://www.xxx.com/files/</DownloadUrl>
+		<LastUpdateTime>2016-07-22</LastUpdateTime>
+	</Updater>
+	<Application applicationId = "my">
+		<EntryPoint>my.exe</EntryPoint>
+		<Location>.</Location>
+		<Version>3.20.21.0927</Version>
+	</Application>
+	<Files>
+		<File Ver="1.0.0.2" Name= "file1.dll" />
+		<File Ver="1.0.0.2" Name= "file2.dll" />
+		<File Ver="1.0.0.2" Name= "my.exe" />
+	</Files>
+	<DeleteFiles>
+		<File Name= "filex.dll" />
+	</DeleteFiles>
+</AutoUpdater>
