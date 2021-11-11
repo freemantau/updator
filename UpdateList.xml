@@ -2,7 +2,7 @@
 <AutoUpdater>
 	<Description>updater</Description>
 	<Updater>
-		<Url>http://www.xxx.com/xmppath/</Url>
+		<Url>http://www.xxx.com/xmlpath/</Url>
 		<DownloadUrl>http://www.xxx.com/files/</DownloadUrl>
 		<LastUpdateTime>2016-07-22</LastUpdateTime>
 	</Updater>
