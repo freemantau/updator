@@ -1,0 +1,105 @@
+﻿<html window-frame="transparent" window-width="500px" window-height="225px">
+<head>
+    <title>系统升级</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="custom.css">
+    <style type="text/css">
+    body{
+        padding: 0;
+        margin:0;
+    }
+    #updater
+    {
+        height:220px;
+    }
+    progress
+    {
+        width:*;
+    }
+    button
+    {
+        text-align:center;
+        margin:0 *;
+    }
+    </style>
+<script|module>
+    import {tpdater} from "tpdator.js";
+    import * as env from "@env";
+    document.ready = function()
+    {
+        let ndown,ndel;
+        let m = tpdater.doit("UpdateList.xml",
+         //start
+        (downcnt,delcnt)=>
+        {
+            this.ndown = downcnt;
+            this.ndel  = delcnt
+            document.$("#pg2").setAttribute("max",downcnt);
+            document.$("#tip2").innerHTML = printf("正在下载第1个文件，共%d个文件",downcnt);
+        },
+        //fileprogress
+        (f,i,n)=>{
+            document.$("#pg1").setAttribute("max",n);
+            document.$("#pg1").setAttribute("value",i);
+            document.$("#tip1").innerHTML = printf("正在下载:%s,%sKB/%sKB",f,i,n);
+        },
+        //listprogress
+        (i,n)=>{
+            document.$("#pg2").setAttribute("value",i);
+            document.$("#tip2").innerHTML = printf("正在下载第%d个文件，共%d个文件",i,n);
+        },
+        //complete
+        (entry)=>{
+            console.log("complete");
+            document.$("#btnok").setAttribute("EntryPoint",entry);
+            document.$("#pg1").setAttribute("value",0);
+            document.$("#pg2").setAttribute("value",0);
+            document.$("#tip1").innerHTML = printf("下载完成,更新%s,删除%s",this.ndown,this.ndel);
+            document.$("#tip2").innerHTML = "更新完成"; 
+            document.$("#btnok").removeAttribute("hidden");
+        },
+        //error
+        (e,entry)=>{
+            console.log("error");
+            document.$("#btnok").setAttribute("EntryPoint",entry);
+            document.$("#tip2").style.setProperty("color","red");
+            document.$("#tip2").innerHTML = e.message;
+            document.$("#btnok").classList.remove("btn-success");
+            document.$("#btnok").classList.add("btn-danger");
+            document.$("#btnok").removeAttribute("hidden");
+            document.$("#btnok").innerHTML = "更新失败"; 
+        }); 
+    } 
+
+    document.$("#btnok").onclick = function()
+    {
+        let exe = this.getAttribute("EntryPoint")
+        if(exe != null)
+        {
+            env.exec(exe); 
+        }
+        setTimeout(()=>{Window.this.close();},1000);
+        
+    }
+
+</script>
+</head>
+<body>
+    <div#updater.row>
+        <div.col-md-12>
+            <div.widget-box>
+                <div.widget-title>               
+                    <h5>系统更新</h5>
+                </div>
+                <div.widget-content>
+                    <progress#pg1  />
+                    <p#tip1>正在准备升级...</p>
+                    <progress#pg2  />
+                    <p#tip2>从服务器读取配置...</p>     
+                    <button#btnok class="btn btn-primary " hidden>完成更新</button>           
+                </div>
+            </div>        
+        </div> 
+    </div>
+</body>
+</html>
